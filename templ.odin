@@ -16,13 +16,15 @@ AnswerType :: union {
 }
 part_one :: proc(input: string) -> AnswerType {
 
+	answer: uint
 
-	return int(0)
+	return answer
 }
 
 part_two :: proc(input: string) -> AnswerType {
+	answer: uint
 
-	return int(0)
+	return answer
 }
 
 main :: proc() {
@@ -32,14 +34,14 @@ main :: proc() {
 	path := "input/day##.txt"
 
 	input_bytes, err := os.read_entire_file_from_path(path, context.allocator)
+	defer delete(input_bytes)
 
 	if err != nil {
-
 		fmt.eprintln("Error reading file..")
 		os.exit(-1)
 	}
+
 	input := string(input_bytes)
-	defer delete(input_bytes)
 	fmt.println("Part one: ", part_one(input))
 
 	fmt.println("Part two: ", part_two(input))
@@ -49,8 +51,8 @@ main :: proc() {
 
 @(test)
 run_test :: proc(t: ^testing.T) {
-	expected_1: AnswerType
-	expected_2: AnswerType
+	expected_1: AnswerType = uint(3)
+	expected_2: AnswerType = uint(0)
 
 	assert(part_one(teststr) == expected_1)
 	assert(part_two(teststr) == expected_2)
