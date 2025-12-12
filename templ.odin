@@ -51,7 +51,7 @@ main :: proc() {
 
 @(test)
 run_test :: proc(t: ^testing.T) {
-	expected_1: AnswerType = uint(3)
+	expected_1: AnswerType = uint(0)
 	expected_2: AnswerType = uint(0)
 
 	assert(part_one(teststr) == expected_1)
