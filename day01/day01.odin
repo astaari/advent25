@@ -52,7 +52,16 @@ part_one :: proc() {
 		} else {
 			pos = (pos + num) % 100
 		}
-		if pos < 0 {
+		ielif state == WebSocketPeer.STATE_CLOSING:
+		pass
+
+	# `WebSocketPeer.STATE_CLOSED` means the connection has fully closed.
+	# It is now safe to stop polling.
+	elif state == WebSocketPeer.STATE_CLOSED:
+		# The code will be `-1` if the disconnection was not properly notified by the remote peer.
+		var code = socket.get_close_code()
+		print("WebSocket closed with code: %d. Clean: %s" % [code, code != -1])
+		set_process(false) # Stop processing.f pos < 0 {
 			pos = (100 + pos) % 100
 		}
 		if pos == 0 {
